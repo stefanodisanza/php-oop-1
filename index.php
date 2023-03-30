@@ -1,32 +1,38 @@
 <?php
+require_once 'db.php';
+?>
+<!DOCTYPE html>
+<html>
 
-class Movie
-{
-    public $titolo;
-    public $regista;
-    public $anno;
-    public $generi;
+<head>
+    <title>Lista Film</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
 
-    public function __construct($titolo, $regista, $anno, $generi)
-    {
-        $this->titolo = $titolo;
-        $this->regista = $regista;
-        $this->anno = $anno;
-        $this->generi = $generi;
-    }
+<body>
+    <div class="container">
+        <h1>Lista Film</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Titolo</th>
+                    <th scope="col">Regista</th>
+                    <th scope="col">Anno</th>
+                    <th scope="col">Generi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($movies as $movie) : ?>
+                    <tr>
+                        <td><?php echo $movie->titolo; ?></td>
+                        <td><?php echo $movie->regista; ?></td>
+                        <td><?php echo $movie->anno; ?></td>
+                        <td><?php echo implode(", ", $movie->generi); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</body>
 
-    public function info()
-    {
-        return "Titolo: " . $this->titolo . ", Regista: " . $this->regista . ", Anno: " . $this->anno . ", Generi: " . implode(", ", $this->generi);
-    }
-}
-
-$movie1 = new Movie("The Family Man", "Brett Ratner", 2000, ["Commedia", "Drammatico"]);
-$movie2 = new Movie("Le ali della libertá", "Frank Darabont", 1994, ["Drammatico"]);
-$movie3 = new Movie("Thor: Love and Thunder", "Taika Waititi", 2022, ["Sci-fi", "Azione"]);
-
-echo $movie1->info();
-echo "\n";
-echo $movie2->info();
-echo "\n";
-echo $movie3->info();
+</html>
